@@ -1,7 +1,7 @@
 from notebook.notebook_parser import Notebook_Parser
 from notebook.notebook import Notebook
-from notebook.note.note import Note
-from filehandler.filehandler import Filehandler
+from notebook.note import Note
+from .filehandler import Filehandler
 import json
 
 class Service():

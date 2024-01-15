@@ -1,5 +1,5 @@
-from json_service.service import Service
-from notebook.note.note import Note
+from service.service import Service
+from notebook.note import Note
 
 class Console_UI():
     def __init__(self):
@@ -40,6 +40,7 @@ class Console_UI():
         print("\nPrinting notes")
         for note in self.service.get_notes_str():
             print(note)
+            print()
         
     def add_note(self):
         print("\nAdding note")
@@ -116,3 +117,6 @@ class Console_UI():
     def file_init(self, new: bool):
         path = input("Enter path to the file: ")
         self.service = Service(path, new)
+        
+if __name__ == "__main__":
+    ui = Console_UI()
