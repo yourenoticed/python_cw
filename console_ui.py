@@ -4,7 +4,7 @@ from notebook.note import Note
 class Console_UI():
     def __init__(self):
         self.run()
-    
+            
     def run(self):
         self.notebook_init()
         if self.service is not None:
@@ -66,7 +66,7 @@ class Console_UI():
             finding = True
             while finding:
                 for i, note in enumerate(notes):
-                    print(i + 1, note)
+                    print(f"{i + 1}. {note}")
                 choice = input("What note are you looking for?\n")
                 if choice.isdigit():
                     choice = int(choice)
