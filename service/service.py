@@ -1,12 +1,15 @@
+from datetime import datetime
 from notebook.notebook_parser import Notebook_Parser
 from notebook.notebook import Notebook
 from notebook.note import Note
 from .filehandler import Filehandler
+from .date_parser import Date_Parser
 import json
 
 class Service():
     def __init__(self, path: str, new_file: bool):
         self.path = path
+        self.date_parser = Date_Parser()
         self.handler = Filehandler(path)
         if new_file:
             self.notebook = Notebook()
@@ -37,3 +40,17 @@ class Service():
     
     def get_notes_str(self):
         return self.notebook.get_notes_str()
+    
+    def filter_by_date(self, start: str, finish=None) -> list[Note] | None:
+        try:
+            start_date = self.date_parser.parse_date(start)
+            if finish:
+                finish_date = self.date_parser.parse_date(finish)
+            else:
+                finish_date = datetime.now()
+            return self.notebook.filter_by_date(start_date, finish_date)
+        except:
+            return None
+        
+    def is_date_valid(self, date: str) -> bool:
+        return self.date_parser._validate_date(date.split("."))

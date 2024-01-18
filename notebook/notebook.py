@@ -1,3 +1,4 @@
+from datetime import datetime
 from .note import Note
 
 class Notebook():
@@ -26,17 +27,16 @@ class Notebook():
         return None
     
     def get_notes_by_title(self, prompt: str) -> list[Note]:
-        result = list()
-        for note in self.notebook:
-            if prompt in note.title:
-                result.append(note)
-        return result
+        return [note for note in self.notebook if prompt in note.title]
     
     def get_notes_data(self) -> list[dict]:
         return [note.get_data() for note in self.notebook]
     
     def get_notes_str(self) -> list[str]:
         return [note.__str__() for note in self.notebook]
+    
+    def filter_by_date(self, start: datetime, finish: datetime) -> list[Note]:
+        return [note for note in self.notebook if note.creation_date >= start and note.creation_date <= finish]
         
     def __iter__(self):
         return self.notebook.__iter__()
